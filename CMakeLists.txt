@@ -90,21 +90,17 @@ option(APPEND_PROJECT_NAME_TO_INCLUDEDIR
   overriding this package from a merged catkin, ament, or colcon workspace."
   OFF)
 
-set(BIN_INSTALL_DIR bin/ CACHE PATH "Installation directory for binaries")
-set(_include_dir "include/")
+include(GNUInstallDirs)
+set(BIN_INSTALL_DIR "${CMAKE_INSTALL_BINDIR}" CACHE PATH "Installation directory for binaries")
+set(_include_dir "${CMAKE_INSTALL_INCLUDEDIR}")
 if(APPEND_PROJECT_NAME_TO_INCLUDEDIR)
   string(APPEND _include_dir "${PROJECT_NAME}/")
 endif()
 set(INCLUDE_INSTALL_DIR "${_include_dir}" CACHE PATH "Installation directory for C++ headers")
 unset(_include_dir)
-set(LIB_INSTALL_DIR lib${LIB_SUFFIX}/ CACHE PATH "Installation directory for libraries")
-set(DATA_INSTALL_DIR share/ CACHE PATH "Installation directory for data")
-if(WIN32)
-    set(DOC_DIR "doc")
-else()
-    set(DOC_DIR "${DATA_INSTALL_DIR}/doc")
-endif()
-set(DOC_INSTALL_DIR ${DOC_DIR} CACHE PATH "Installation directory for documentation")
+set(LIB_INSTALL_DIR "${CMAKE_INSTALL_LIBDIR}" CACHE PATH "Installation directory for libraries")
+set(DATA_INSTALL_DIR "${CMAKE_INSTALL_DATAROOTDIR}" CACHE PATH "Installation directory for data")
+set(DOC_INSTALL_DIR ${CMAKE_INSTALL_DOCDIR} CACHE PATH "Installation directory for documentation")
 set(LICENSE_INSTALL_DIR ${DATA_INSTALL_DIR}/${PROJECT_NAME} CACHE PATH "Installation directory for licenses")
 
 ###############################################################################
